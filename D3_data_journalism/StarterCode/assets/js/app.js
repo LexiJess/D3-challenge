@@ -24,7 +24,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Initial Params
-var chosenXAxis = "income";
+var chosenXAxis = "age";
 
 // function used for updating x-scale var upon click on axis label
 function xScale(incomeData, chosenXAxis) {
@@ -66,18 +66,18 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 
   var label;
 
-  if (chosenXAxis === "income") {
-    label = "Income:";
+  if (chosenXAxis === "age") {
+    label = "Age:";
   }
   else {
-    label = "Age:";
+    label = "Income:$";
   }
 
   var toolTip = d3.tip()
     .attr("class", "tooltip")
     .offset([80, -60])
     .html(function(d) {
-      return (`${d.rockband}<br>${label} ${d[chosenXAxis]}`);
+      return (`${d.state}<br>${label} ${d[chosenXAxis]}`);
     });
 
   circlesGroup.call(toolTip);
