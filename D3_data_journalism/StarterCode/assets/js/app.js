@@ -24,7 +24,7 @@ var chartGroup = svg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 // Initial Params
-var chosenXAxis = "age";
+var chosenXAxis = "income";
 
 // function used for updating x-scale var upon click on axis label
 function xScale(incomeData, chosenXAxis) {
@@ -66,11 +66,11 @@ function updateToolTip(chosenXAxis, circlesGroup) {
 
   var label;
 
-  if (chosenXAxis === "age") {
-    label = "Age:";
+  if (chosenXAxis === "obesity") {
+    label = "Percent Obesity: ";
   }
   else {
-    label = "Income:$";
+    label = "Income: $";
   }
 
   var toolTip = d3.tip()
@@ -111,7 +111,7 @@ d3.csv("./assets/data/data.csv").then(function(incomeData, err) {
 
   // Create y scale function
   var yLinearScale = d3.scaleLinear()
-    .domain([0, d3.max(incomeData, d => d.age)])
+    .domain([0, d3.max(incomeData, d => d.obesity * 1.5)])
     .range([height, 0]);
 
   // Create initial axis functions
@@ -148,14 +148,14 @@ d3.csv("./assets/data/data.csv").then(function(incomeData, err) {
     .attr("y", 20)
     .attr("value", "income") // value to grab for event listener
     .classed("active", true)
-    .text("Income");
+    .text("Income in USD");
 
-  var ageLabel = labelsGroup.append("text")
+  var obesityLabel = labelsGroup.append("text")
     .attr("x", 0)
     .attr("y", 40)
-    .attr("value", "age") // value to grab for event listener
+    .attr("value", "obesity") // value to grab for event listener
     .classed("inactive", true)
-    .text("Age");
+    .text("Percent Obesity");
 
   // append y axis
   chartGroup.append("text")
@@ -164,7 +164,7 @@ d3.csv("./assets/data/data.csv").then(function(incomeData, err) {
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .classed("axis-text", true)
-    .text("Income");
+    .text("Age");
 
   // updateToolTip function above csv import
   var circlesGroup = updateToolTip(chosenXAxis, circlesGroup);
@@ -199,15 +199,15 @@ d3.csv("./assets/data/data.csv").then(function(incomeData, err) {
           incomeLabel
             .classed("active", true)
             .classed("inactive", false);
-          hairLengthLabel
+          obesityLabel
             .classed("active", false)
             .classed("inactive", true);
         }
         else {
-          ageLabel
+          incomeLabel
             .classed("active", false)
             .classed("inactive", true);
-          incomeLabel
+          obesityLabel
             .classed("active", true)
             .classed("inactive", false);
         }
