@@ -137,7 +137,25 @@ d3.csv("./assets/data/data.csv").then(function(incomeData, err) {
     .attr("cy", d => yLinearScale(d.age))
     .attr("r", 20)
     .attr("fill", "pink")
-    .attr("opacity", ".5");
+    .attr("opacity", ".75");
+
+
+var circleLabels = chartGroup.selectAll(null).data(incomeData).enter().append("text");
+
+circleLabels
+  .attr("x", function(d) {
+    return xLinearScale(d[chosenXAxis]);
+  })
+  .attr("y", function(d) {
+    return yLinearScale(d.age);
+  })
+  .text(function(d) {
+    return d.abbr;
+  })
+  .attr("font-family", "sans-serif")
+  .attr("font-size", "10px")
+  .attr("text-anchor", "middle")
+  .attr("fill", "purple");
 
   // Create group for two x-axis labels
   var labelsGroup = chartGroup.append("g")
