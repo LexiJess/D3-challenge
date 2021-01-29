@@ -1,7 +1,7 @@
 Visualizing health trends among different demographics
 
 
-Starting with a basic HTML webpage, run by a python server, we explore the relationships between health outcomes
+Starting with a basic HTML webpage, run on the liveserver, we explore the relationships between health outcomes
 and demographic indicators. Specifically, we look at Age, Obesity, and Income, with their relationships displayed in 
 a bubble chart with hover-over tags for demographic information by state. This project uses D3, Bootstrap, tooltip, Cloudflare, and jquery.
 
